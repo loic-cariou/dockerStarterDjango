@@ -42,6 +42,14 @@ COPY etc/supervisor/supervisord.conf /etc/supervisor/supervisord.conf
 COPY ssh/id_ed25519 /root/.ssh/id_rsa
 RUN chmod 400 /root/.ssh/id_rsa
 
+ARG HOST_REPO
+RUN ssh-keyscan -t rsa ${HOST_REPO} > /root/.ssh/known_hosts
+
+ARG CLONE_REPO
+RUN git clone ${CLONE_REPO} /home/app/application
+
+RUN cd /home/app/application/ && yarn install && yarn build
+
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord"]

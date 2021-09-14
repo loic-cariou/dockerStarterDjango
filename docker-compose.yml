@@ -29,7 +29,7 @@ services:
       context: ./.docker/frontend
       dockerfile: Dockerfile
       args:
-        CLONE_REPO: git@github.com:loic-cariou/djangoRestStarter.git
+        CLONE_REPO: git@github.com:loic-cariou/reactStarter.git
         HOST_REPO: github.com
     depends_on:
       - api
