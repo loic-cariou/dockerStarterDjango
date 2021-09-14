@@ -23,6 +23,20 @@ services:
       - api-data:/home/app/application
     labels:
       - "traefik.http.routers.owotcms.rule=Host(`api.localhost`)"
+  
+  front:
+    build:
+      context: ./.docker/frontend
+      dockerfile: Dockerfile
+      args:
+        CLONE_REPO: git@github.com:loic-cariou/djangoRestStarter.git
+        HOST_REPO: github.com
+    depends_on:
+      - api
+    volumes:
+      - front-data:/home/app/application
+    labels:
+      - "traefik.http.routers.front.rule=Host(`front.localhost`)"
 
   postgres:
     build: ./.docker/postgres
@@ -44,3 +58,4 @@ services:
 volumes:
   postgres-data: {}
   api-data: {}
+  front-data: {}

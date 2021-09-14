@@ -1,2 +1,2 @@
 /.idea/
-/.docker/backend/ssh/id_*
+/.docker/**/ssh/id_*
